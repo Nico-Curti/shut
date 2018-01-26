@@ -30,8 +30,9 @@ Function install_ninja
     Expand-Archive $out_dir -DestinationPath ninja
     If ( $add2path )
     {
+        $Documents = [Environment]::GetFolderPath('MyDocuments')
         $env:PATH = $env:PATH + ";$PWD\ninja\"
-        -join('$env:PATH = $env:PATH', " + `";$PWD\ninja\`"") | Out-File -FilePath "$env:UserProfile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
+        -join('$env:PATH = $env:PATH', " + `";$PWD\ninja\`"") | Out-File -FilePath "$env:UserProfile\$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
     Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
 
