@@ -2,11 +2,9 @@
 Function install_python
 {
     Param (
-            [Parameter(Mandatory=$true, Position=0)]
             [String] $url,
-            [Parameter(Mandatory=$true, Position=1)]
             [Bool] $add2path,
-            [Parameter(ValueFromRemainingArguments=$false)]
+            [Parameter(Mandatory=$false, ValueFromRemainingArguments=$false)]
             [String[]] $modules
             )
     Write-Host "Download Python from "$url
