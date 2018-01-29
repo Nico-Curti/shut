@@ -15,14 +15,14 @@ function install_7zip
 	echo "Unzip" $out_dir
 	tar jxvf $out_dir
 
-
-	cd p7zip_16.02/ # wrong
-	cp makefile.linux_gcc6_sanitize makefile.linux # wrong
+	$out=$(echo $out | cut -d'_' -f 1,2)
+	cd $out/
+	cp makefile.linux_gcc6_sanitize makefile.linux
 	make -j all_test
 	cd ..
 	if $add2path; then
-		export PATH=$PATH:$PWD/p7zip_16.02/bin # wrong
-		echo export PATH='$PATH':$PWD/p7zip_16.02/bin >> ~/.bashrc # wrong
+		export PATH=$PATH:$PWD/$out/bin 
+		echo export PATH='$PATH':$PWD/$out/bin >> ~/.bashrc 
 	fi
 
 	popd
