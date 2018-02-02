@@ -26,5 +26,4 @@ function install_ninja
 	popd
 }
 
-install_ninja "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" "." true
 
