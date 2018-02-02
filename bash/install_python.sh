@@ -1,3 +1,4 @@
+#!/bin/bash
 
 function install_python
 {
@@ -25,4 +26,3 @@ function install_python
 	rm $Exec
 }
 
-install_python "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" true

@@ -1,5 +1,6 @@
+#!/bin/bash
 
-function install_ninja()
+function install_ninja
 {
 	url=$1
 	path=$2

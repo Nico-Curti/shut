@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh
 
 Function install_g++
 {

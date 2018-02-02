@@ -1,5 +1,6 @@
+#!/bin/bash
 
-function install_cmake()
+function install_cmake
 {
 	url=$1
 	path=$2
@@ -24,4 +25,3 @@ function install_cmake()
 	popd
 }
 
-install_cmake "https://cmake.org/files/v3.10/cmake-3.10.0-Linux-x86_64.tar.gz" "." true
