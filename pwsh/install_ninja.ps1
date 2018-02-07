@@ -32,9 +32,9 @@ Function install_ninja
     If ( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$PWD\ninja\"
         -join('$env:PATH = $env:PATH', " + `";$PWD\ninja\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    $env:PATH = $env:PATH + ";$PWD\ninja\"
     Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
 
     Pop-Location

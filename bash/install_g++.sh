@@ -26,13 +26,13 @@ function install_g++
 	make install
 
 	if $add2path; then
-		export CC=$HOME/$out/bin/gcc
-		export CXX=$HOME/$out/bin/g++
 		echo "export CC=$HOME/$out/bin/gcc" >> ~/.bashrc
 		echo "export CXX=$HOME/$out/bin/g++" >> ~/.bashrc
-		export PATH=$PATH:$PWD/$out/bin/
 		echo export PATH='$PATH':$PWD/$out/bin/ >> ~/.bashrc
 	fi
+	export CC=$HOME/$out/bin/gcc
+	export CXX=$HOME/$out/bin/g++
+	export PATH=$PATH:$PWD/$out/bin/
 
 	popd
 }

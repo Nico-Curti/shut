@@ -18,10 +18,8 @@ function install_blender
 	tar jxvf $out_dir
 	rm -rf $out_dir
 	mv $out blender
-	if $add2path; then
-		export PATH='$PATH':$PWD/blender/
-		echo export PATH='$PATH':$PWD/blender/ >> ~/.bashrc
-	fi
+	if $add2path; then	echo export PATH='$PATH':$PWD/blender/ >> ~/.bashrc ; fi
+	export PATH='$PATH':$PWD/blender/
 
 	url="https://bootstrap.pypa.io/get-pip.py"
 	cd blender/$ver/python/bin

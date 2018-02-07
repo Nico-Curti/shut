@@ -36,13 +36,14 @@ Function install_g++
     If( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$PWD\mingw32\bin\;$PWD\usr\bin\"
         -join('$env:PATH = $env:PATH', " + `";$PWD\mingw32\bin\;$PWD\usr\bin\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
-        Set-Variable -Name "CC" -Value "$PWD\mingw32\bin\gcc.exe"
         -join('Set-Variable -Name "CC" -Value ', "'$PWD\mingw32\bin\gcc.exe'") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
-        Set-Variable -Name "CXX" -Value "$PWD\mingw32\bin\g++.exe"
         -join('Set-Variable -Name "CXX" -Value ', "'$PWD\mingw32\bin\g++.exe'") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    $env:PATH = $env:PATH + ";$PWD\mingw32\bin\;$PWD\usr\bin\"
+    Set-Variable -Name "CC" -Value "$PWD\mingw32\bin\gcc.exe"
+    Set-Variable -Name "CXX" -Value "$PWD\mingw32\bin\g++.exe"
+    
     Set-Location ..
 
     Pop-Location

@@ -18,10 +18,8 @@ function install_ninja
 	else 7za x $out_dir -o ninja;
 	fi
 	rm -rf $out_dir
-	if $add2path; then
-		export PATH='$PATH':$PWD/ninja
-		echo export PATH='$PATH':$PWD/ninja >> ~/.bashrc
-	fi
+	if $add2path; then	echo export PATH='$PATH':$PWD/ninja >> ~/.bashrc; fi
+	export PATH='$PATH':$PWD/ninja
 
 	popd
 }

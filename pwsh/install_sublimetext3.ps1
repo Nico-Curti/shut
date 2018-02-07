@@ -23,12 +23,12 @@ Function install_sublime
     If ( $add2path )
     {
         Write-Host Add of alias sublime to powershell configuration
-        Set-Alias sublime $PWD\sublimetext3\subl.exe
         $Documents = [Environment]::GetFolderPath('MyDocuments')
         "Set-Alias sublime $PWD\sublimetext3\subl.exe" | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
-        $env:PATH = $env:PATH + ";$PWD\sublimetext3\"
         -join('$env:PATH = $env:PATH', " + `";$PWD\sublimetext3\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    Set-Alias sublime $PWD\sublimetext3\subl.exe
+    $env:PATH = $env:PATH + ";$PWD\sublimetext3\"
     
     Pop-Location
 }

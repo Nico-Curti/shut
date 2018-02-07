@@ -19,10 +19,8 @@ function install_python
 		pip install $module
 	done
 
-	if $add2path; then
-		export PATH=~/$Conda/bin:~/$Conda/Scripts:~/$Conda/Library/bin:~/$Conda/Library/usr/bin:~/$Conda/Library/mingw-w64/bin:'$PATH'
-		echo export PATH=~/$Conda/bin:~/$Conda/Scripts:~/$Conda/Library/bin:~/$Conda/Library/usr/bin:~/$Conda/Library/mingw-w64/bin:'$PATH' >> ~/.bashrc
-	fi
+	if $add2path; then	echo export PATH=~/$Conda/bin:~/$Conda/Scripts:~/$Conda/Library/bin:~/$Conda/Library/usr/bin:~/$Conda/Library/mingw-w64/bin:'$PATH' >> ~/.bashrc; fi
+	export PATH=~/$Conda/bin:~/$Conda/Scripts:~/$Conda/Library/bin:~/$Conda/Library/usr/bin:~/$Conda/Library/mingw-w64/bin:'$PATH'
 	rm $Exec
 }
 

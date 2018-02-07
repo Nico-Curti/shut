@@ -21,10 +21,8 @@ function install_7zip
 	cp makefile.linux_gcc6_sanitize makefile.linux
 	make -j all_test
 	cd ..
-	if $add2path; then
-		export PATH=$PATH:$PWD/$out/bin 
-		echo export PATH='$PATH':$PWD/$out/bin >> ~/.bashrc 
-	fi
+	if $add2path; then	echo export PATH='$PATH':$PWD/$out/bin >> ~/.bashrc ; fi
+	export PATH=$PATH:$PWD/$out/bin 
 
 	popd
 }

@@ -17,11 +17,8 @@ function install_cmake
 	tar zxf $out_dir
 	rm -rf $out_dir
 	mv $out cmake
-	if $add2path; then
-		export PATH='$PATH':$PWD/cmake/bin
-		echo export PATH='$PATH':$PWD/cmake/bin >> ~/.bashrc
-	fi
-
+	if $add2path; then	echo export PATH='$PATH':$PWD/cmake/bin >> ~/.bashrc ; fi
+	export PATH='$PATH':$PWD/cmake/bin
 	popd
 }
 

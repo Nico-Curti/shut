@@ -30,9 +30,9 @@ Function install_python
     If ( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$env:UserProfile\$conda;$env:UserProfile\$conda\Scripts;$env:UserProfile\$conda\Library\bin;$env:UserProfile\$conda\Library\usr\bin;$env:UserProfile\$conda\Library\mingw-w64\bin;"
         -join('$env:PATH = $env:PATH', " + `";$env:UserProfile\$conda;$env:UserProfile\$conda\Scripts;$env:UserProfile\$conda\Library\bin;$env:UserProfile\$conda\Library\usr\bin;$env:UserProfile\$conda\Library\mingw-w64\bin;`"") | Out-File -FilePath "$env:UserProfile\$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    $env:PATH = $env:PATH + ";$env:UserProfile\$conda;$env:UserProfile\$conda\Scripts;$env:UserProfile\$conda\Library\bin;$env:UserProfile\$conda\Library\usr\bin;$env:UserProfile\$conda\Library\mingw-w64\bin;"
     conda update conda -y
     conda config --add channels bioconda
     Foreach ($i in $modules)

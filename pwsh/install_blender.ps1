@@ -37,9 +37,9 @@ Function install_blender
     If( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$PWD\blender\$dir_name"
         -join('$env:PATH = $env:PATH', " + `";$PWD\blender\$dir_name`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    $env:PATH = $env:PATH + ";$PWD\blender\$dir_name"
 
     $url = "https://bootstrap.pypa.io/get-pip.py"
     Set-Location $dir_name/$ver/python/bin

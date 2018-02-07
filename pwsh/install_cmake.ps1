@@ -33,9 +33,9 @@ Function install_cmake
     If ( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$PWD\cmake\$out\bin\"
         -join('$env:PATH = $env:PATH', " + `";$PWD\cmake\$out\bin\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
+    $env:PATH = $env:PATH + ";$PWD\cmake\$out\bin\"
     Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
 
     Pop-Location
