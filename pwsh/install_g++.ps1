@@ -4,15 +4,16 @@ Function install_g++
 {
     Param (
             [Parameter(Mandatory=$true, Position=0)]
-            [String] $path,
+            [String] $url,
             [Parameter(Mandatory=$true, Position=1)]
+            [String] $path,
+            [Parameter(Mandatory=$true, Position=2)]
             [Bool] $add2path
             )
     Push-Location
     Set-Location $path
     
-    Write-Host download g++ from https://sourceforge.net/projects/msys2/files/Base/i686/msys2-base-i686-20161025.tar.xz
-    $url = "https://sourceforge.net/projects/msys2/files/Base/i686/msys2-base-i686-20161025.tar.xz"
+    Write-Host download g++ from $url
     $Job = Start-BitsTransfer -Source $url -Asynchronous
     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
     { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.

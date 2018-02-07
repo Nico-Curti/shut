@@ -3,6 +3,8 @@
 Function install_sublime
 {
     Param (
+            [Parameter(Mandatory=$true, Position=0)]
+            [String] $url,
             [Parameter(Mandatory=$true, Position=1)]
             [String] $path,
             [Parameter(Mandatory=$false, Position=2)]
@@ -11,8 +13,8 @@ Function install_sublime
     Push-Location
     Set-Location $path
     
-	Write-Host Download sublimetext3 from "https://download.sublimetext.com/Sublime%20Text%20Build%203143%20x64.zip"
-    download "https://download.sublimetext.com/Sublime%20Text%20Build%203143%20x64.zip"
+	Write-Host Download sublimetext3 from $url
+    download $url
     
     Write-Host unzip Sublime%20Text%20Build%203143%20x64.zip
     Expand-Archive Sublime%20Text%20Build%203143%20x64.zip -DestinationPath "$PWD/sublimetext3"

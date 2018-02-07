@@ -29,19 +29,20 @@ Function install_blender
     }
 
     Write-Host unzip $out_dir
-    Expand-Archive $out_dir
+    Expand-Archive $out_dir -DestinationPath blender
     Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
-    Move-Item -Path ./blender* -Destination blender
+    Set-Location blender
+    $dir_name = Get-ChildItem blender* -Name
 
     If( $add2path )
     {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
-        $env:PATH = $env:PATH + ";$PWD\blender\"
-        -join('$env:PATH = $env:PATH', " + `";$PWD\blender\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
+        $env:PATH = $env:PATH + ";$PWD\blender\$dir_name"
+        -join('$env:PATH = $env:PATH', " + `";$PWD\blender\$dir_name`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
 
     $url = "https://bootstrap.pypa.io/get-pip.py"
-    Set-Location blender/$ver/python/bin
+    Set-Location $dir_name/$ver/python/bin
     $Job = Start-BitsTransfer -Source $url -Asynchronous
     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
     { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
@@ -56,7 +57,7 @@ Function install_blender
     Write-Host "Run get-pip"
     $bpy = Get-ChildItem "python*.exe" -Name
     & ./$bpy get-pip.py
-    Remove-Item get-pip.py -Forece -ErrorAction SilentlyContinue
+    Remove-Item get-pip.py -Force -ErrorAction SilentlyContinue
 
     Set-Location ..\Scripts\
 
