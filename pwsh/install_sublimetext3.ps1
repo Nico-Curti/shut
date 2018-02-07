@@ -14,7 +14,16 @@ Function install_sublime
     Set-Location $path
     
 	Write-Host Download sublimetext3 from $url
-    download $url
+    $Job = Start-BitsTransfer -Source $url -Asynchronous
+    while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
+    { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
+
+    Switch($Job.JobState)
+    {
+        "Transferred" {Complete-BitsTransfer -BitsJob $Job}
+        "Error" {$Job | Format-List } # List the errors.
+        default {"Other action"} #  Perform corrective action.
+    }
     
     Write-Host unzip Sublime%20Text%20Build%203143%20x64.zip
     Expand-Archive Sublime%20Text%20Build%203143%20x64.zip -DestinationPath "$PWD/sublimetext3"
