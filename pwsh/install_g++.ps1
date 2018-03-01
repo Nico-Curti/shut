@@ -51,10 +51,8 @@ Function install_g++
         )
 
     Write-Host "g++ identification: " -NoNewLine
-    $gcc = Get-Command g++ -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
-    If( $gcc -eq $null){$version = ""}
-    Else{$version = & g++ "--version"}
-    If( $gcc -eq $null ){ # g++ not found
+    $tel = Get-Command telegraf -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
+    If( $telegraf -eq $null ){ # g++ not found
         Write-Host "NOT FOUND" -ForegroundColor Red
         If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ){ get_g++ -add2path $add2path -path $path}
         Else{

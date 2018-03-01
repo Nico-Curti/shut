@@ -1,24 +1,17 @@
 #!/usr/bin/env pwsh
 
-#$url = "https://dl.influxdata.com/telegraf/releases/telegraf-1.5.2_windows_amd64.zip"
-
-Function install_telegraf
+Function get_telegraf
 {
     Param (
-            [Parameter(Mandatory=$true, Position=0)]
-            [String] $url,
-            [Parameter(Mandatory=$true, Position=1)]
-            [String] $path,
-            [Parameter(Mandatory=$false, Position=2)]
             [Bool] $add2path
             )
-    Push-Location
-    Set-Location $path
-    
-    Write-Host "Download telegraf from "$url
-    $out_dir = $url.split('/')[-1]
+
+    $url_telegraf = "https://dl.influxdata.com/telegraf/releases/telegraf-1.5.2_windows_amd64.zip"
+
+    Write-Host "Download telegraf from "$url_telegraf
+    $out_dir = $url_telegraf.split('/')[-1]
     $out = $out_dir.Substring(0, $out_dir.Length - 4) # remove extension (.zip)
-    $Job = Start-BitsTransfer -Source $url -Asynchronous
+    $Job = Start-BitsTransfer -Source $url_telegraf -Asynchronous
     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
     { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
 
@@ -38,6 +31,23 @@ Function install_telegraf
     }
     $env:PATH = $env:PATH + ";$PWD\telegraf\telegraf\"
     Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
+}
 
-    Pop-Location
+Function install_telegraf
+{
+    Param(
+            [Bool] $add2path,
+            [Parameter(Mandatory=$false)] [String] $confirm = ""
+        )
+
+    If( -Not (Get-Command telegraf -ErrorAction SilentlyContinue) ){ # ninja not installed
+        Write-Host "NOT FOUND" -ForegroundColor Red
+        If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ){ get_telegraf -add2path $add2path }
+        Else{
+            $CONFIRM = Read-Host -Prompt "Do you want install it? [y/n]"
+            If($CONFIRM -eq 'N' -Or $CONFIRM -eq 'n') { Write-Host "Abort" -ForegroundColor Red}
+            Else{ get_telegraf -add2path $add2path }
+        }
+    }
+    Else{ Write-Host "FOUND" -ForegroundColor Green}
 }
