@@ -1,18 +1,20 @@
 #!/usr/bin/env pwsh
 
-Function install_python
+Function get_python
 {
     Param (
-            [String] $url,
             [Bool] $add2path,
             [Parameter(Mandatory=$false, ValueFromRemainingArguments=$false)]
             [String[]] $modules
             )
-    Write-Host "Download Python from "$url
-    $exec = $url.split('/')[-1]
+    
+    $url_python = "https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe"
+
+    Write-Host "Download Python from "$url_python
+    $exec = $url_python.split('/')[-1]
     $conda = $exec.split('-')[0] # miniconda/anaconda
 
-    $Job = Start-BitsTransfer -Source $url -Asynchronous
+    $Job = Start-BitsTransfer -Source $url_python -Asynchronous
     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
     { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
 
@@ -38,5 +40,59 @@ Function install_python
     Foreach ($i in $modules)
     {
         pip install $i
+    }
+}
+
+
+Function install_python
+{
+    Param(
+            [Bool] $add2path,
+            [Parameter(Mandatory=$false)] [String] $confirm = "",
+            [Parameter(Mandatory=$false, ValueFromRemainingArguments=$false)] [String[]] $modules
+        )
+
+    Write-Host "(Conda)Python3 identification: " -NoNewLine
+    If( -Not (Get-Command python -ErrorAction SilentlyContinue) ){ $pyver = "" }
+    Else {  $pyver = python -c "import sys; print(sys.version)" }# python version
+    if(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*3.*")) {# right version 3. so install snakemake
+        Write-Host "FOUND" -ForegroundColor Green
+        Write-Host "snakemake identification: " -NoNewLine
+        If( -Not (Get-Command snakemake -ErrorAction SilentlyContinue) ) {
+            Write-Host "NOT FOUND" -ForegroundColor Red
+            If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ) {
+                conda update conda -y
+                conda config --add channels bioconda
+                pip install $modules
+            }
+            Else{
+                $CONFIRM = Read-Host -Prompt "Do you want install snakemake and other dependecies? [y/n]"
+                If($CONFIRM -eq 'N' -Or $CONFIRM -eq 'n') { Write-Host "Abort" -ForegroundColor Red }
+                Else{
+                    conda update conda -y 
+                    conda config --add channels bioconda
+                    pip install $modules
+                }
+            }
+        }
+        Else { Write-Host "FOUND" -ForegroundColor Green}
+    }
+    ElseIf(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*2.*")) {
+        Write-Host "The Python version found is too old for snakemake" -ForegroundColor Red
+        If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ) { get_python -add2path $add2path -modules $modules }
+        Else{
+            $CONFIRM = Read-Host -Prompt "Do you want install a new version of Python, snakemake and other dependecies? [y/n]"
+            If($CONFIRM -eq 'N' -Or $CONFIRM -eq 'n') { Write-Host "Abort" -ForegroundColor Red }
+            Else { get_python -add2path $add2path -modules $modules }
+        }
+    }
+    Else{
+        Write-Host "NOT FOUND" -ForegroundColor Red
+        If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ) { get_python -add2path $add2path -modules $modules }
+        Else{
+            $CONFIRM = Read-Host -Prompt "Do you want install snakemake and other dependecies? [y/n]"
+            If($CONFIRM -eq 'N' -Or $CONFIRM -eq 'n') { Write-Host "Abort" -ForegroundColor Red }
+            Else { get_python -add2path $add2path -modules $modules }
+        }
     }
 }
