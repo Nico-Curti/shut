@@ -18,8 +18,7 @@ Function get_python
     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
     { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
 
-    Switch($Job.JobState)
-    {
+    Switch($Job.JobState) {
         "Transferred" {Complete-BitsTransfer -BitsJob $Job}
         "Error" {$Job | Format-List } # List the errors.
         default {"Other action"} #  Perform corrective action.
@@ -29,16 +28,14 @@ Function get_python
     cmd.exe /c "start /wait `"`" $exec /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\$conda"
     Remove-Item $conda -Force -ErrorAction SilentlyContinue
     $conda = $conda.ToLower()
-    If ( $add2path )
-    {
+    If ( $add2path ) {
         $Documents = [Environment]::GetFolderPath('MyDocuments')
         -join('$env:PATH = $env:PATH', " + `";$env:UserProfile\$conda;$env:UserProfile\$conda\Scripts;$env:UserProfile\$conda\Library\bin;$env:UserProfile\$conda\Library\usr\bin;$env:UserProfile\$conda\Library\mingw-w64\bin;`"") | Out-File -FilePath "$env:UserProfile\$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     }
     $env:PATH = $env:PATH + ";$env:UserProfile\$conda;$env:UserProfile\$conda\Scripts;$env:UserProfile\$conda\Library\bin;$env:UserProfile\$conda\Library\usr\bin;$env:UserProfile\$conda\Library\mingw-w64\bin;"
     conda update conda -y
     conda config --add channels bioconda
-    Foreach ($i in $modules)
-    {
+    Foreach ($i in $modules) {
         pip install $i
     }
 }
@@ -63,7 +60,9 @@ Function install_python
             If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" ) {
                 conda update conda -y
                 conda config --add channels bioconda
-                pip install $modules
+                Foreach ($i in $modules) {
+                    pip install $i
+                }
             }
             Else{
                 $CONFIRM = Read-Host -Prompt "Do you want install snakemake and other dependecies? [y/n]"
@@ -71,11 +70,18 @@ Function install_python
                 Else{
                     conda update conda -y 
                     conda config --add channels bioconda
-                    pip install $modules
+                    Foreach ($i in $modules) {
+                        pip install $i
+                    }
                 }
             }
         }
-        Else { Write-Host "FOUND" -ForegroundColor Green}
+        Else { 
+            Write-Host "FOUND" -ForegroundColor Green
+            Foreach ($i in $modules) {
+                pip install $i
+            }
+        }
     }
     ElseIf(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*2.*")) {
         Write-Host "The Python version found is too old for snakemake" -ForegroundColor Red

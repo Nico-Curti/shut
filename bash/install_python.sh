@@ -43,6 +43,9 @@ function install_python
         printf "Conda identification: "
         if echo $Conda | grep -q "miniconda" || echo $Conda | grep -q "anaconda"; then 
             echo ${green}"FOUND"${reset}; # CONDA INSTALLER FOUND
+            for module in ${3:+"$@"}; do
+                pip install $module
+            done
         else
             echo ${red}"NOT FOUND"${reset};
             if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then 
