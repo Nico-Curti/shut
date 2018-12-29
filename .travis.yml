@@ -3,6 +3,7 @@ os:
   - osx
 
 script:
+  - chmod 777 ./install.sh
   - ./install.sh -y
   - g++ --version
   - cmake --version
