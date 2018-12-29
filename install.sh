@@ -59,9 +59,9 @@ source ~/.bashrc
 
 echo "Installing g++"
 if [ $silent ]; then
-  install_g++ true $confirm >> $log
+  install_g++ true $confirm true >> $log
 else
-  install_g++ true $confirm
+  install_g++ true $confirm true
 fi
 source ~/.bashrc
 if [ ! -z $(which g++) ]; then
@@ -70,9 +70,9 @@ if [ ! -z $(which g++) ]; then
   gcc_min_version=$(echo "${gcc_min_version//./}")
   if [ $gcc_ver -lt $gcc_min_version ]; then
     if [ $silent ]; then
-      install_g++ true $confirm >> $log
+      install_g++ true $confirm false >> $log
     else
-      install_g++ true $confirm
+      install_g++ true $confirm false
     fi
   fi
   source ~/.bashrc
@@ -88,9 +88,9 @@ source ~/.bashrc
 
 echo "Installing CMake"
 if [ $silent ]; then
-  install_cmake true $confirm >> $log
+  install_cmake true $confirm true >> $log
 else
-  install_cmake true $confirm
+  install_cmake true $confirm true
 fi
 source ~/.bashrc
 if [ ! -z $(which cmake) ]; then
@@ -99,9 +99,9 @@ if [ ! -z $(which cmake) ]; then
   cmake_min_version=$(echo "${cmake_min_version//./}")
   if [ $cmake_ver -lt $cmake_min_version ]; then
     if [ $silent ]; then
-      install_cmake true $confirm >> $log
+      install_cmake true $confirm false >> $log
     else
-      install_cmake true $confirm
+      install_cmake true $confirm false
     fi
   fi
   source ~/.bashrc

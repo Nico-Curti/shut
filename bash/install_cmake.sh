@@ -10,6 +10,7 @@ cmake_version="3.12.1"
 function get_cmake
 {
   add2path=$1
+  postfix=$2
   cmake_up_version="$(echo $cmake_version | cut -d'.' -f 1,2)"
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -28,7 +29,11 @@ function get_cmake
   rm -rf $out_dir
   mv $out cmake
   if $add2path; then
-    echo export PATH='$PATH':$PWD/cmake/bin >> ~/.bashrc ;
+    if $postfix; then
+      echo export PATH='$PATH':$PWD/cmake/bin >> ~/.bashrc
+    else
+      echo export PATH=$PWD/cmake/bin:'$PATH' >> ~/.bashrc
+    fi
   fi
   #export PATH='$PATH':$PWD/cmake/bin
 }
@@ -37,6 +42,7 @@ function install_cmake
 {
   add2path=$1
   confirm=$2
+  postfix=$3
 
   printf "cmake identification: "
   if [ -z $(which cmake) ]; then
@@ -55,13 +61,13 @@ function install_cmake
       # end conda installer
     else
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
-        get_cmake $add2path;
+        get_cmake $add2path $postfix;
       else
         read -p "Do you want install it? [y/n] " confirm;
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
           echo ${red}"Abort"${reset};
         else
-          get_cmake $add2path;
+          get_cmake $add2path $postfix;
         fi
       fi
       # end function installer
@@ -77,13 +83,13 @@ function install_cmake
     if [ $ver -lt $currver ]; then
       echo ${red}"Old CMake version found"${reset}
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
-        get_cmake $add2path;
+        get_cmake $add2path $postfix;
       else
         read -p "Do you want install it? [y/n] " confirm;
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
           echo ${red}"Abort"${reset};
         else
-          get_cmake $add2path;
+          get_cmake $add2path $postfix;
         fi
       fi
     fi
@@ -91,4 +97,4 @@ function install_cmake
   # end cmake not found
 }
 
-install_cmake true -y
+#install_cmake true -y

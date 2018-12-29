@@ -20,10 +20,10 @@ Function get_sublime
 
   If ( $add2path )
   {
-    Write-Host Add of alias sublime to powershell configuration
     $Documents = [Environment]::GetFolderPath('MyDocuments')
-    "Set-Alias sublime $PWD\sublimetext3\subl.exe" | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     -join('$env:PATH = $env:PATH', " + `";$PWD\sublimetext3\`"") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
+    #Write-Host Add of alias sublime to powershell configuration
+    #"Set-Alias sublime $PWD\sublimetext3\subl.exe" | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
   }
   Set-Alias sublime $PWD\sublimetext3\subl.exe
   $env:PATH = $env:PATH + ";$PWD\sublimetext3\"
@@ -37,7 +37,7 @@ Function install_sublimetext3
         )
   Write-Host "SublimeText3 identification: " -NoNewLine
   $sub = ((Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall") | Where-Object { $_.GetValue( "DisplayName" ) -like "*sublime*"} | Select Name) -Or (Get-Command subl*)
-  If( $true)#$sub -eq $false)
+  If( $sub -eq $false)
   { # not installed
     Write-Host "NOT FOUND" -ForegroundColor Red
     If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" )

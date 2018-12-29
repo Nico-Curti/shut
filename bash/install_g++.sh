@@ -10,6 +10,7 @@ version="8.2.0"
 function get_g++
 {
   add2path=$1
+  postfix=$2
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     url_gcc="ftp://ftp.gnu.org/gnu/gcc/gcc-$version/gcc-$version.tar.gz"
@@ -37,7 +38,11 @@ function get_g++
   if $add2path; then
     echo "export CC=$HOME/$out/bin/gcc" >> ~/.bashrc
     echo "export CXX=$HOME/$out/bin/g++" >> ~/.bashrc
-    echo export PATH='$PATH':$PWD/$out/bin/ >> ~/.bashrc
+    if $postfix; then
+      echo export PATH='$PATH':$PWD/$out/bin/ >> ~/.bashrc
+    else
+      echo export PATH=$PWD/$out/bin/:'$PATH' >> ~/.bashrc
+    fi
   fi
   #export CC=$HOME/$out/bin/gcc
   #export CXX=$HOME/$out/bin/g++
@@ -48,6 +53,7 @@ function install_g++
 {
   add2path=$1
   confirm=$2
+  postfix=$3
 
   printf "g++ identification: "
   if [ ! -z $(which g++) ]; then
@@ -83,13 +89,13 @@ function install_g++
     echo ${red}sufficient version NOT FOUND${reset}
     if [ $(which make) != "" ]; then
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
-        get_g++ $add2path
+        get_g++ $add2path $postfix
       else
         read -p "Do you want install it? [y/n] " confirm
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
           echo ${red}"Abort"${reset};
         else
-          get_g++ $add2path
+          get_g++ $add2path $postfix
         fi
       fi
     else
@@ -104,13 +110,13 @@ function install_g++
     if [ $ver -lt $currver ]; then
       echo ${red}"Old g++ version found"${reset}
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
-        get_g++ $add2path
+        get_g++ $add2path $postfix
       else
         read -p "Do you want install it? [y/n] " confirm
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
           echo ${red}"Abort"${reset};
         else
-          get_g++ $add2path
+          get_g++ $add2path $postfix
         fi
       fi
     fi

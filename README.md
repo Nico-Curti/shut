@@ -1,6 +1,6 @@
 | **Authors**  | **Project** |  **Build Status**              |
 |:------------:|:-----------:|:-----------------------------:|
-|   N. Curti   |    ShUt     |  **Linux/MacOS** : [![travis](https://travis-ci.org/Nico-Curti/shut.svg?branch=master)](https://travis-ci.org/Nico-Curti/shut) <br/> **Windows**     : [![appveyor](https://ci.appveyor.com/api/projects/status/ciaywdvr0mjkklpa?svg=true)](https://ci.appveyor.com/project/Nico-Curti/shut) |
+|   N. Curti   |    ShUt     |  **Linux/MacOS** : [![travis](https://travis-ci.org/Nico-Curti/shut.svg?branch=master)](https://travis-ci.org/Nico-Curti/shut) <br/>                            **Windows**     : [![appveyor](https://ci.appveyor.com/api/projects/status/ciaywdvr0mjkklpa?svg=true)](https://ci.appveyor.com/project/Nico-Curti/shut) |
 
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/issues)
@@ -20,27 +20,33 @@ The **shut** project is designed to overcome this slow work chain and bypass the
 The list of installers is the following:
 
 
-|  **Install**  |     **Windows**       |    **Linux/MacOS**    |
-|:-------------:|:---------------------:|:---------------------:|
-|      g++      | :+1: (msys2)          | :+1: (version 8.2.0)  |
-|     CMake     | :+1: (version 3.12.1) | :+1: (version 3.12.1) |
-|     Make      | :+1: (msys2)          | :+1:                  |
-|    Python3    | :+1: (miniconda 3)    | :+1: (miniconda 3)    |
-|      Pip      | :+1:                  | :+1:                  |
-|  Ninja-build  | :+1: (version 1.8.2)  | :+1: (version 1.8.2)  |
-|    Telegraf   | :+1:                  | :+1:                  |
-| Blender + Pip | :+1: (version 2.7)    | :+1: (version 2.7)    |
-|   Chocolatey  | :+1:                  |        *miss*         |
-|  SublimeText3 | :+1:                  |        *miss*         |
-|     7zip      |        *miss*         | :+1: (version 16.02)  |
+|  **Install**  |     **Windows**             |    **Linux/MacOS**          |
+|:-------------:|:---------------------------:|:---------------------------:|
+|      g++      | :+1: <br/> (msys2)          | :+1: <br/> (version 8.2.0)  |
+|     CMake     | :+1: <br/> (version 3.12.1) | :+1: <br/> (version 3.12.1) |
+|     Make      | :+1: <br/> (msys2)          | :+1:                        |
+|    Python3    | :+1: <br/> (Miniconda 3)    | :+1: <br/> (Miniconda 3)    |
+|      Pip      | :+1:                        | :+1:                        |
+|  Ninja-build  | :+1: <br/> (version 1.8.2)  | :+1: <br/> (version 1.8.2)  |
+|    Telegraf   | :+1:                        | :+1:                        |
+| Blender + Pip | :+1: <br/> (version 2.7)    | :+1: <br/> (version 2.7)    |
+|   Chocolatey  | :+1:                        |        *miss*               |
+|  SublimeText3 | :+1:                        | :+1:                        |
+|     7zip      |        *miss*               | :+1: <br/> (version 16.02)  |
 
 An usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
+
+**Note**: Pay attention to the order of dependencies!
 
 ## Authors
 
 * **Nico Curti** [git](https://github.com/Nico-Curti), [unibo](https://www.unibo.it/sitoweb/nico.curti2)
 
 See also the list of [contributors](https://github.com/Nico-Curti/shut/contributors) [![GitHub contributors](https://img.shields.io/github/contributors/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/graphs/contributors/) who participated in this project.
+
+## Contributions
+
+Changes and improvements are more than welcome!
 
 ## License
 
