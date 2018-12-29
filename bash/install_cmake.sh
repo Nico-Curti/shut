@@ -69,9 +69,11 @@ function install_cmake
     # end python found
   else
     echo ${green}"FOUND"${reset}
-    ver=$(echo $(cmake --version) | cut -d' ' -f 4)
+    ver=$(echo $(cmake --version) | cut -d' ' -f 3)
     ver=$(echo "${ver//./}")
     currver=$(echo "${cmake_version//./}")
+    echo $ver
+    echo $currver
     if [ $ver -lt $currver ]; then
       echo ${red}"Old CMake version found"${reset}
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
@@ -89,4 +91,4 @@ function install_cmake
   # end cmake not found
 }
 
-#install_cmake true -y
+install_cmake true -y

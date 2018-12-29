@@ -19,22 +19,28 @@ The **shut** project is designed to overcome this slow work chain and bypass the
 
 The list of installers is the following:
 
-- [x] g++ (version 8.2.0)
-- [x] Cmake (version 3.12.1)
-- [x] Make
-- [x] Python3 (Miniconda)
-- [x] pip
-- [x] Ninja-build (version 1.8.2)
-- [x] Blender
-- [x] 7zip
 
-A usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
+|  **Install**  |     **Windows**       |    **Linux/MacOS**    |
+|:-------------:|:---------------------:|:---------------------:|
+|      g++      | :+1: (msys2)          | :+1: (version 8.2.0)  |
+|     CMake     | :+1: (version 3.12.1) | :+1: (version 3.12.1) |
+|     Make      | :+1: (msys2)          | :+1:                  |
+|    Python3    | :+1: (miniconda 3)    | :+1: (miniconda 3)    |
+|      Pip      | :+1:                  | :+1:                  |
+|  Ninja-build  | :+1: (version 1.8.2)  | :+1: (version 1.8.2)  |
+|    Telegraf   | :+1:                  | :+1:                  |
+| Blender + Pip | :+1: (version 2.7)    | :+1: (version 2.7)    |
+|   Chocolatey  | :+1:                  |        *miss*         |
+|  SublimeText3 | :+1:                  |        *miss*         |
+|     7zip      |        *miss*         | :+1: (version 16.02)  |
+
+An usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
 
 ## Authors
 
 * **Nico Curti** [git](https://github.com/Nico-Curti), [unibo](https://www.unibo.it/sitoweb/nico.curti2)
 
-See also the list of [contributors](https://github.com/Nico-Curti/shut/contributors) [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://GitHub.com/Nico-Curti/shut/graphs/contributors/) who participated in this project.
+See also the list of [contributors](https://github.com/Nico-Curti/shut/contributors) [![GitHub contributors](https://img.shields.io/github/contributors/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/graphs/contributors/) who participated in this project.
 
 ## License
 

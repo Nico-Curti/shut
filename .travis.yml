@@ -4,7 +4,8 @@ os:
 
 script:
   - chmod 777 ./install.sh
-  - ./install.sh -y
+  - travis_wait 120 ./install.sh -y
+  - source ~/.bashrc
   - g++ --version
   - cmake --version
   - python --version

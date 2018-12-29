@@ -9,3 +9,10 @@ before_build:
 
 build_script:
   - powershell -Command "& '.\install.ps1 ' '-y'"
+  - $PROFILE
+  - refreshenv
+  - g++ --version
+  - cmake --version
+  - python --version
+  - conda --version
+  - make --version

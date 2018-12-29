@@ -94,7 +94,7 @@ else
 fi
 source ~/.bashrc
 if [ ! -z $(which cmake) ]; then
-  cmake_ver=$(echo $(cmake --version) | cut -d' ' -f 4)
+  cmake_ver=$(echo $(cmake --version) | cut -d' ' -f 3)
   cmake_ver=$(echo "${cmake_ver//./}")
   cmake_min_version=$(echo "${cmake_min_version//./}")
   if [ $cmake_ver -lt $cmake_min_version ]; then
