@@ -1,6 +1,7 @@
 #!/usr/bin/env pwsh
 
-. ".\install_cmake.ps1"
+$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
+. "$scriptPath\install_cmake.ps1"
 
 Function get_g++
 {

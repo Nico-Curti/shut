@@ -1,6 +1,6 @@
 | **Authors**  | **Project** |  **Build Status**              |
-|:------------:|:-----------:|:-----------------------------------------------------------------------------------:|:-----------------------------:|
-|   N. Curti   |    ShUt     |  **Linux/MacOS** : [![travis](https://travis-ci.com/Nico-Curti/shut.svg?token=7QqsqaQiuDHSyGDT3xek&branch=master)](https://travis-ci.com/Nico-Curti/shut) <br/> **Windows** :  |
+|:------------:|:-----------:|:-----------------------------:|
+|   N. Curti   |    ShUt     |  **Linux/MacOS** : [[![travis](https://travis-ci.org/Nico-Curti/shut.svg?branch=master)](https://travis-ci.org/Nico-Curti/shut) <br/> **Windows** : [![appveyor](https://ci.appveyor.com/api/projects/status/ciaywdvr0mjkklpa?svg=true)](https://ci.appveyor.com/project/Nico-Curti/shut) |
 
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/Nico-Curti/shut.svg?style=plastic)](https://github.com/Nico-Curti/shut/issues)
@@ -8,6 +8,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/Nico-Curti/shut.svg?label=Stars&style=social)](https://github.com/Nico-Curti/shut/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/Nico-Curti/shut.svg?label=Watch&style=social)](https://github.com/Nico-Curti/shut/watchers)
 
+# Shut
 ### (Shell Utility)
 
 The project includes a series of utility scripts for both Unix and Windows users.
@@ -18,14 +19,14 @@ The **shut** project is designed to overcome this slow work chain and bypass the
 
 The list of installers is the following:
 
-[x] g++ (version 8.2.0)
-[x] Cmake (version 3.12.1)
-[x] Make
-[x] Python3 (Miniconda)
-[x] pip
-[x] Ninja-build (version 1.8.2)
-[x] Blender
-[x] 7zip
+- [ x ] g++ (version 8.2.0)
+- [ x ] Cmake (version 3.12.1)
+- [ x ] Make
+- [ x ] Python3 (Miniconda)
+- [ x ] pip
+- [ x ] Ninja-build (version 1.8.2)
+- [ x ] Blender
+- [ x ] 7zip
 
 A usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
 
