@@ -1,0 +1,11 @@
+os:
+  - linux
+  - osx
+
+script:
+  - ./install.sh -y
+  - g++ --version
+  - cmake --version
+  - python --version
+  - conda --version
+  - make --version

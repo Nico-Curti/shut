@@ -1,0 +1,11 @@
+image: Visual Studio 2017
+clone_folder: c:\projects\shut
+
+install:
+  - git submodule -q update --init --recursive
+
+before_build:
+  - cd C:\projects\shut
+
+build_script:
+  - powershell -Command "& '.\install.ps1 ' '-y'"
