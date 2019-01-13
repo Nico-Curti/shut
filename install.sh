@@ -126,6 +126,8 @@ source ~/.bashrc
 
 popd > /dev/null
 
+echo ${green}"Build prerequisites [done]"${reset}
+
 # Build project
 #echo ${yellow}"Build $project"${reset}
 #if [ $silent ]; then
