@@ -58,44 +58,11 @@ Function install_python
   if(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*3.*"))
   {# right version 3. so install snakemake
     Write-Host "FOUND" -ForegroundColor Green
-    Write-Host "snakemake identification: " -NoNewLine
-    If( -Not (Get-Command snakemake -ErrorAction SilentlyContinue) )
+    conda update conda -y
+    conda config --add channels bioconda
+    Foreach ($i in $modules)
     {
-      Write-Host "NOT FOUND" -ForegroundColor Red
-      If( $confirm -eq "-y" -Or $confirm -eq "-Y" -Or $confirm -eq "yes" )
-      {
-        conda update conda -y
-        conda config --add channels bioconda
-        Foreach ($i in $modules)
-        {
-          pip install $i
-        }
-      }
-      Else
-      {
-          $CONFIRM = Read-Host -Prompt "Do you want install snakemake and other dependecies? [y/n]"
-          If($CONFIRM -eq 'N' -Or $CONFIRM -eq 'n')
-          {
-            Write-Host "Abort" -ForegroundColor Red
-          }
-          Else
-          {
-            conda update conda -y
-            conda config --add channels bioconda
-            Foreach ($i in $modules)
-            {
-              pip install $i
-            }
-          }
-      }
-    }
-    Else
-    {
-      Write-Host "FOUND" -ForegroundColor Green
-      Foreach ($i in $modules)
-      {
-        pip install $i
-      }
+      pip install $i
     }
   }
   ElseIf(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*2.*"))
