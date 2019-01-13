@@ -18,7 +18,7 @@ install:
   - "python -m pip install -U pip"
   - "python --version"
   - "pip --version"
-  - Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+  - "SET PROFILE=C:\Users\appveyor\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1"
 
   - git submodule -q update --init --recursive
 
