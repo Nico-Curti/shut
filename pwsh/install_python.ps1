@@ -26,13 +26,13 @@ Function get_python
     -join('$env:PATH = $env:PATH', " + `";$PWD\$conda;$PWD\$conda\Scripts;$PWD\$conda\Library\bin;$PWD\$conda\Library\usr\bin;$PWD\$conda\Library\mingw-w64\bin;`"") | Out-File -FilePath "$env:UserProfile\$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
   }
   #$env:PATH = $env:PATH + ";$PWD\$conda;$PWD\$conda\Scripts;$PWD\$conda\Library\bin;$PWD\$conda\Library\usr\bin;$PWD\$conda\Library\mingw-w64\bin;"
-  $PROFILE
+  . "$PROFILE"
 
-  conda update conda -y
-  conda config --add channels bioconda
+  conda.exe update conda -y
+  conda.exe config --add channels bioconda
   Foreach ($i in $modules)
   {
-    pip install $i
+    pip.exe install $i
   }
 }
 
@@ -58,11 +58,11 @@ Function install_python
   if(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*3.*"))
   {# right version 3. so install snakemake
     Write-Host "FOUND" -ForegroundColor Green
-    conda update conda -y
-    conda config --add channels bioconda
+    conda.exe update conda -y
+    conda.exe config --add channels bioconda
     Foreach ($i in $modules)
     {
-      pip install $i
+      pip.exe install $i
     }
   }
   ElseIf(($pyver -like "*Miniconda*" -Or $pyver -like "*Anaconda*") -And ($pyver -like "*2.*"))
