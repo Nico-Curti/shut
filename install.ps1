@@ -15,15 +15,22 @@ Else
 }
 $silent = $args[2]
 
-$PROFILE
+$Documents = [Environment]::GetFolderPath('MyDocuments')
+If ( $PROFILE -eq $null )
+{
+  New-Item $Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -type file
+  Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+}
+Else
+{
+  . "$PROFILE"
+}
 
 $project = "shut"
 $log = "install_$project.log"
 
 # For the right Permission
 # Set-ExecutionPolicy Bypass -Scope CurrentUser
-
-$Documents = [Environment]::GetFolderPath('MyDocuments')
 
 Write-Host "Installing $project dependecies:" -ForegroundColor Yellow
 Write-Host "  - cmake"
@@ -63,6 +70,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 # Miniconda3 Installer
 Write-Host "Installation Python3"
@@ -75,6 +83,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 # g++ Installer
 Write-Host "Installation g++"
@@ -87,6 +96,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 # Chocolatey Installer
 Write-Host "Installation Chocolatey"
@@ -99,6 +109,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 # Sublime Installer
 Write-Host "Installation SublimeText3"
@@ -111,6 +122,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 # Ninja-build Installer
 Write-Host "Installation Ninja-build"
@@ -123,6 +135,7 @@ if ( $silent )
 {
   Stop-Transcript
 }
+. "$PROFILE"
 
 Pop-Location > $null
 

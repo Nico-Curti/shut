@@ -12,16 +12,15 @@ Function get_g++
   $url_gcc = "https://sourceforge.net/projects/msys2/files/Base/i686/msys2-base-i686-20161025.tar.xz"
   Write-Host download g++ from $url_gcc
   $out_dir = $url_gcc.split('/')[-1]
-  $out = $out_dir.Substring(0, $out_dir.Length - 4) # remove extension (.zip)
 
-  Invoke-WebRequest -Uri $url_gcc -OutFile $out_dir
+  Invoke-WebRequest $url_gcc -OutFile $out_dir
 
   If( -Not (Get-Command cmake -ErrorAction SilentlyContinue) )
   { # cmake not installed
     install_cmake -add2path $true -confirm "-y"
   }
-  cmake -E tar zxf msys2-base-i686-20161025.tar.xz
-  Remove-Item msys2-base-i686-20161025.tar.xz -Force -Recurse -ErrorAction SilentlyContinue
+  cmake -E tar zxf $out_dir
+  Remove-Item $out_dir -Force -Recurse -ErrorAction SilentlyContinue
   Set-Location msys32
   ./msys2_shell.cmd
   Start-Sleep -s 60
@@ -35,9 +34,9 @@ Function get_g++
     -join('Set-Variable -Name "CC" -Value ', "'$PWD\mingw32\bin\gcc.exe'") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
     -join('Set-Variable -Name "CXX" -Value ', "'$PWD\mingw32\bin\g++.exe'") | Out-File -FilePath "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Append -Encoding ASCII
   }
-  $env:PATH = $env:PATH + ";$PWD\mingw32\bin\;$PWD\usr\bin\"
-  Set-Variable -Name "CC" -Value "$PWD\mingw32\bin\gcc.exe"
-  Set-Variable -Name "CXX" -Value "$PWD\mingw32\bin\g++.exe"
+  #$env:PATH = $env:PATH + ";$PWD\mingw32\bin\;$PWD\usr\bin\"
+  #Set-Variable -Name "CC" -Value "$PWD\mingw32\bin\gcc.exe"
+  #Set-Variable -Name "CXX" -Value "$PWD\mingw32\bin\g++.exe"
 
   Set-Location ..
 }
