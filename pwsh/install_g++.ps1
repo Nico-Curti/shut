@@ -13,7 +13,7 @@ Function get_g++
   Write-Host download g++ from $url_gcc
   $out_dir = $url_gcc.split('/')[-1]
 
-  Invoke-WebRequest $url_gcc -OutFile $out_dir
+  Start-BitsTransfer -source $url_gcc
 
   If( -Not (Get-Command cmake -ErrorAction SilentlyContinue) )
   { # cmake not installed

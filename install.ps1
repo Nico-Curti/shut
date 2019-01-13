@@ -16,7 +16,7 @@ Else
 $silent = $args[2]
 
 $Documents = [Environment]::GetFolderPath('MyDocuments')
-If ( $PROFILE -eq $null )
+If ( !$PROFILE )
 {
   New-Item $Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -type file
   Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
