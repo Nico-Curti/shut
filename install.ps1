@@ -16,15 +16,10 @@ Else
 $silent = $args[2]
 
 $Documents = [Environment]::GetFolderPath('MyDocuments')
-If ( !$PROFILE )
-{
-  New-Item $Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -type file
-  Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-}
-Else
-{
-  . "$PROFILE"
-}
+New-Item $Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -type file -ErrorAction SilentlyContinue
+Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+. "$PROFILE"
+
 
 $project = "shut"
 $log = "install_$project.log"
