@@ -12,14 +12,13 @@ environment:
       PYTHON_ARCH: "64"
       MINICONDA: "C:\\Miniconda36-x64"
 
-before_install:
+install:
   # Use Miniconda to accelerate the build (max time for CI is 60 minutes!)
   - "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - "python -m pip install -U pip"
   - "python --version"
   - "pip --version"
 
-install:
   - git submodule -q update --init --recursive
 
 before_build:
