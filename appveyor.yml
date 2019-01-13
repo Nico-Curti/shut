@@ -18,6 +18,7 @@ install:
   - "python -m pip install -U pip"
   - "python --version"
   - "pip --version"
+  - Set-Variable -Name "PROFILE" -Value "$Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
   - git submodule -q update --init --recursive
 
@@ -26,7 +27,7 @@ before_build:
 
 build_script:
   - powershell -Command "& '.\install.ps1 ' '-y'"
-  - $PROFILE
+  - . "$PROFILE"
   - refreshenv
   - g++ --version
   - cmake --version

@@ -37,8 +37,8 @@ Write-Host "  - make"
 . ".\pwsh\install_g++.ps1"
 Write-Host "  - Chocolatey (recommended)"
 . ".\pwsh\install_choco.ps1"
-#Write-Host "  - SublimeText3 (recommended)"
-#. ".\pwsh\install_sublimetext3.ps1"
+Write-Host "  - SublimeText3 (recommended)"
+. ".\pwsh\install_sublimetext3.ps1"
 Write-Host "  - Ninja"
 . ".\pwsh\install_ninja.ps1"
 
@@ -106,18 +106,18 @@ if ( $silent )
 }
 . "$PROFILE"
 
-## Sublime Installer
-#Write-Host "Installation SublimeText3"
-#if ( $silent )
-#{
-#  Start-Transcript -Append -Path $log
-#}
-#install_sublimetext3 -add2path $true -confirm $confirm
-#if ( $silent )
-#{
-#  Stop-Transcript
-#}
-#. "$PROFILE"
+# Sublime Installer
+Write-Host "Installation SublimeText3"
+if ( $silent )
+{
+  Start-Transcript -Append -Path $log
+}
+install_sublimetext3 -add2path $true -confirm $confirm
+if ( $silent )
+{
+  Stop-Transcript
+}
+. "$PROFILE"
 
 # Ninja-build Installer
 Write-Host "Installation Ninja-build"
@@ -143,3 +143,4 @@ Write-Host "Build prerequisites [done]" -ForegroundColor Green
 #  & .\build.ps1
 #}
 
+exit 0
