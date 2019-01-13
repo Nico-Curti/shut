@@ -27,6 +27,8 @@ before_build:
 
 build_script:
   - powershell -Command "& '.\install.ps1 ' '-y'"
+
+on_finish:
   - . "$PROFILE"
   - refreshenv
   - g++ --version
