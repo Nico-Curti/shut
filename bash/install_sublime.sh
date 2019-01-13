@@ -59,4 +59,4 @@ function install_sublime
   # end sublime not found
 }
 
-install_sublime true -y
+#install_sublime true -y

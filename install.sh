@@ -64,19 +64,20 @@ else
   install_g++ true $confirm true
 fi
 source ~/.bashrc
-if [ ! -z $(which g++) ]; then
-  gcc_ver=$(echo $(g++ --version) | cut -d' ' -f 4)
-  gcc_ver=$(echo "${gcc_ver//./}")
-  gcc_min_version=$(echo "${gcc_min_version//./}")
-  if [ $gcc_ver -lt $gcc_min_version ]; then
-    if [ $silent ]; then
-      install_g++ true $confirm false >> $log
-    else
-      install_g++ true $confirm false
-    fi
-  fi
-  source ~/.bashrc
-fi
+#### TOO SLOW FOR CI
+#if [ ! -z $(which g++) ]; then
+#  gcc_ver=$(echo $(g++ --version) | cut -d' ' -f 4)
+#  gcc_ver=$(echo "${gcc_ver//./}")
+#  gcc_min_version=$(echo "${gcc_min_version//./}")
+#  if [ $gcc_ver -lt $gcc_min_version ]; then
+#    if [ $silent ]; then
+#      install_g++ true $confirm false >> $log
+#    else
+#      install_g++ true $confirm false
+#    fi
+#  fi
+#  source ~/.bashrc
+#fi
 
 echo "Installing Make"
 if [ $silent ]; then

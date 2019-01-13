@@ -19,4 +19,4 @@ function get_pip
   fi
 }
 
-get_pip
+#get_pip

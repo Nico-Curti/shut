@@ -65,4 +65,4 @@ Function install_ninja
   }
 }
 
-install_ninja -add2path $true -confirm -y
+#install_ninja -add2path $true -confirm -y
