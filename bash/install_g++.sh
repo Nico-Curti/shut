@@ -32,8 +32,10 @@ function get_g++
   mkdir -p objdir
   cd objdir
   $PWD/../$out-sources/configure --prefix=$HOME/$out --enable-languages=c,c++
+  #--disable-multilib
   make
   make install
+  cd ..
 
   if $add2path; then
     echo "export CC=$HOME/$out/bin/gcc" >> ~/.bashrc
