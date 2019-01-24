@@ -28,11 +28,12 @@ The list of installers is the following:
 |    Python3    | :+1: <br/> (Miniconda 3)    | :+1: <br/> (Miniconda 3)    |
 |      Pip      | :+1:                        | :+1:                        |
 |  Ninja-build  | :+1: <br/> (version 1.8.2)  | :+1: <br/> (version 1.8.2)  |
-|    Telegraf   | :+1:                        | :+1:                        |
+|    Telegraf   | :+1: <br/> (version 1.5.2)  | :+1: <br/> (version 1.5.2)  |
 | Blender + Pip | :+1: <br/> (version 2.7)    | :+1: <br/> (version 2.7)    |
 |   Chocolatey  | :+1:                        |        *miss*               |
 |  SublimeText3 | :+1:                        | :+1:                        |
 |     7zip      |        *miss*               | :+1: <br/> (version 16.02)  |
+|       R       |        *miss*               | :+1: <br/> (version 3.5.1)  |
 
 An usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
 

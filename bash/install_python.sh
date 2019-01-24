@@ -67,7 +67,7 @@ function install_python
       # CONDA INSTALLER FOUND
       echo ${green}"FOUND"${reset};
       for module in ${3:+"$@"}; do
-        pip install $modules
+        pip install $module
       done
     else
       echo ${red}"NOT FOUND"${reset};
