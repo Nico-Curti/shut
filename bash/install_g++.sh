@@ -31,8 +31,7 @@ function get_g++
   cd ..
   mkdir -p objdir
   cd objdir
-  $PWD/../$out-sources/configure --prefix=$HOME/$out --enable-languages=c,c++
-  #--disable-multilib
+  $PWD/../$out-sources/configure --prefix=$HOME/$out --enable-languages=c,c++ || $PWD/../$out-sources/configure --prefix=$HOME/$out --enable-languages=c,c++ --disable-multilib
   make
   make install
   cd ..
@@ -41,9 +40,9 @@ function get_g++
     echo "export CC=$HOME/$out/bin/gcc" >> ~/.bashrc
     echo "export CXX=$HOME/$out/bin/g++" >> ~/.bashrc
     if $postfix; then
-      echo export PATH='$PATH':$PWD/$out/bin/ >> ~/.bashrc
+      echo export PATH='$PATH':$HOME/$out/bin/ >> ~/.bashrc
     else
-      echo export PATH=$PWD/$out/bin/:'$PATH' >> ~/.bashrc
+      echo export PATH=$HOME/$out/bin/:'$PATH' >> ~/.bashrc
     fi
   fi
   #export CC=$HOME/$out/bin/gcc
