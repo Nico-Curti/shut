@@ -34,6 +34,7 @@ The list of installers is the following:
 |  SublimeText3 | :+1:                        | :+1:                        |
 |     7zip      |        *miss*               | :+1: <br/> (version 16.02)  |
 |       R       |        *miss*               | :+1: <br/> (version 3.5.1)  |
+|    julia      | :+1: <br/> (version 1.1.0)  | :+1: <br/> (version 1.0.1)  |
 
 An usage example of these scripts is given in [install.sh]() (for Linux and MacOs) and [install.ps1]() (for Windows).
 

@@ -9,7 +9,7 @@ Function get_ninja
   $ninja_version = "1.8.2"
   $url_ninja = "https://github.com/ninja-build/ninja/releases/download/v$ninja_version/ninja-win.zip"
 
-  Write-Host Download ninja from $url
+  Write-Host Download ninja from $url_ninja
   $out_dir = $url_ninja.split('/')[-1]
 
   if (Test-Path $out_dir) { return }
