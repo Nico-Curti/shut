@@ -1,9 +1,9 @@
 #!/bin/bash
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
 function get_python
 {
@@ -16,7 +16,7 @@ function get_python
     url_python="https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
   fi
 
-  echo Download python from $url_python
+  echo -e "${yellow}Download python from ${url_python}${reset}"
   Exec=$(echo $url_python | rev | cut -d'/' -f 1 | rev)
   Conda=$(echo $Exec | cut -d'-' -f 1)
 
@@ -45,38 +45,38 @@ function install_python
   confirm=$2
   modules=$3
 
-  printf "Python3 identification: "
+  printf "${yellow}Python3 identification: ${reset}"
   if [ -z $(which python) ]; then
-    echo ${red}"NOT FOUND"${reset}
+    echo -e "${red}NOT FOUND${reset}"
     if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
       get_python true $modules
     else
       read -p "Do you want install it? [y/n] " confirm
       if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-        echo ${red}"Abort"${reset};
+        echo -e "${red}Abort${reset}";
       else
         get_python true $modules
       fi
     fi
     # close python not found
   elif [ "$(python -c 'import sys;print(sys.version_info[0])')" -eq "3" ]; then # right python version installed
-    echo ${green}"FOUND"${reset}
+    echo -e "${green}FOUND${reset}"
     Conda=$(which python)
-    printf "Conda identification: "
+    printf "${yellow}Conda identification: ${reset}"
     if echo $Conda | grep -q "miniconda" || echo $Conda | grep -q "anaconda"; then
       # CONDA INSTALLER FOUND
-      echo ${green}"FOUND"${reset};
+      echo -e "${green}FOUND${reset}";
       for module in ${3:+"$@"}; do
         pip install $module
       done
     else
-      echo ${red}"NOT FOUND"${reset};
+      echo -e "${red}NOT FOUND${reset}";
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
         get_python true $modules
       else
         read -p "Do you want install it? [y/n] " confirm
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           get_python true $modules
         fi
@@ -84,20 +84,20 @@ function install_python
       # close get python
     fi
   elif [ "$(python -c 'import sys;print(sys.version_info[0])')" -eq "2" ]; then
-    echo ${red}"The Python version found is too old"${reset};
+    echo -e "${red}The Python version found is too old${reset}";
     if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
       get_python true $modules
     else
       read -p "Do you want install it? [y/n] " confirm
       if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-        echo ${red}"Abort"${reset};
+        echo -e "${red}Abort${reset}";
       else
         get_python true $modules
       fi
     fi
     # close python too old
   else
-    echo ${red}"Python impossible to install"${reset}
+    echo -e "${red}Python impossible to install${reset}"
   fi
 }
 

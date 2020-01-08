@@ -1,20 +1,20 @@
 #!/bin/bash
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
 function get_pip
 {
   if [ -z $(which python) ]; then
-    echo ${red}python NOT FOUND${reset}
+    echo -e "${red}Python NOT FOUND${reset}"
   else
     url_pip="https://bootstrap.pypa.io/get-pip.py"
-    echo Download get-pip from $url_pip
+    echo -e "${yellow}Download get-pip from ${url_pip}${reset}"
     wget $url_pip
 
-    echo "Run get-pip"
+    echo -e "${yellow}Run get-pip${reset}"
     python $PWD/get-pip.py
   fi
 }

@@ -1,11 +1,9 @@
 #!/bin/bash
 
-scriptpath=`pwd`
-
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
 function get_sublime
 {
@@ -17,11 +15,11 @@ function get_sublime
    url_sublime="https://download.sublimetext.com/sublime_text_3_build_3176_x64.tar.bz2"
   fi
 
-  echo "Download SublimeText3 from " $url_sublime
+  echo -e "${yellow}Download SublimeText3 from ${url_sublime}${reset}"
   out_dir=$(echo $url_sublime | rev | cut -d'/' -f 1 | rev)
   wget $url_sublime
 
-  echo "Unzip" $out_dir
+  echo -e "${yellow}Unzip ${out_dir}${reset}"
   if [[ "OSTYPE" == "darwin" ]]; then
     7za x $out_dir;
   else
@@ -40,21 +38,21 @@ function install_sublime
   confirm=$2
 
   call=$( sublime_text -v 2> /dev/null )
-  printf "SublimeText3 identification: "
+  printf "${yellow}SublimeText3 identification: ${reset}"
   if [[ -z $call ]]; then
-    echo ${red}"NOT FOUND"${reset};
+    echo -e "${red}NOT FOUND${reset}";
     if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
       get_sublime $add2path;
     else
       read -p "Do you want install it? [y/n] " confirm;
       if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-        echo ${red}"Abort"${reset};
+        echo -e "${red}Abort${reset}";
       else
         get_sublime $add2path;
       fi
     fi
   else
-    echo ${green}"FOUND"${reset}
+    echo -e "${green}FOUND${reset}"
   fi
   # end sublime not found
 }

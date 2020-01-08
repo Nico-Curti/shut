@@ -1,14 +1,14 @@
 #!/bin/bash
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
 function get_ninja
 {
   add2path=$1
-  version="1.8.2"
+  version="1.9.0"
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     url_ninja="https://github.com/ninja-build/ninja/releases/download/v$version/ninja-mac.zip"
@@ -16,7 +16,7 @@ function get_ninja
     url_ninja="https://github.com/ninja-build/ninja/releases/download/v$version/ninja-linux.zip"
   fi
 
-  echo "Download ninja-build from " $url
+  echo -e "${yellow}Download ninja-build from ${url}${reset}"
   name=$(echo $url_ninja | rev | cut -d'/' -f 1 | rev)
   out="$(basename $name .zip)"
   wget $url_ninja
@@ -25,7 +25,7 @@ function get_ninja
   mv $name ninja/
   cd ninja
 
-  echo "Unzip" $name
+  echo -e "${yellow}Unzip ${name}${reset}"
   if [ -x "unzip" ]; then
     unzip $name;
   else
@@ -45,18 +45,18 @@ function install_ninja
   add2path=$1
   confirm=$2
 
-  printf "ninja-build identification: "
+  printf "${yellow}ninja-build identification: ${reset}"
   if [ ! -z $(which ninja) ]; then
-    echo ${green}"FOUND"${reset}
+    echo -e "${green}FOUND${reset}"
   else
-    echo ${red}"NOT FOUND"${reset}
+    echo -e "${red}NOT FOUND${reset}"
     if [ ! -z $(which conda) ]; then
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
         conda install -y -c anaconda ninja;
       else
         read -p "Do you want install it? [y/n] " confirm
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           conda install -y -c anaconda ninja;
         fi
@@ -67,7 +67,7 @@ function install_ninja
       else
         read -p "Do you want install it? [y/n] " confirm;
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           get_ninja $add2path;
         fi

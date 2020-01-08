@@ -17,15 +17,15 @@ source ~/.bashrc
 project="shut"
 log="install_$project.log"
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
 gcc_min_version="7.3.0"
 cmake_min_version="3.12.1"
 
-echo ${yellow}"Installing $project dependecies:"${reset}
+echo -e "${yellow}Installing $project dependecies:${reset}"
 echo "  - (Conda) Python3"
 source ./bash/install_python.sh
 echo "  - g++ (> $gcc_min_version)"
@@ -39,7 +39,7 @@ source ./bash/install_7zip.sh
 source ./bash/install_ninja.sh
 
 
-echo "Installation path : "${green}$path2out${reset}
+echo -e "Installation path : ${green}${path2out}${reset}"
 
 pushd $HOME > /dev/null
 mkdir -p $path2out
@@ -126,10 +126,10 @@ source ~/.bashrc
 
 popd > /dev/null
 
-echo ${green}"Build prerequisites [done]"${reset}
+echo -e "${green}Build prerequisites [done]${reset}"
 
 # Build project
-#echo ${yellow}"Build $project"${reset}
+#echo -e "${yellow}Build ${project}${reset}""
 #if [ $silent ]; then
 #  sh ./build.sh >> $log
 #else

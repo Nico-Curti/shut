@@ -5,7 +5,7 @@ Function get_cmake
   Param (
           [Bool] $add2path
         )
-  $cmake_version = "3.12.1"
+  $cmake_version = "3.16.2"
   $cmake_up_version = $cmake_version.Substring(0, $cmake_version.Length - 2)
   $url_cmake = "https://cmake.org/files/v$cmake_up_version/cmake-$cmake_version-win64-x64.zip"
 

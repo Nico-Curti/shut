@@ -7,7 +7,7 @@ Function get_blender
           [Parameter(Mandatory=$false, ValueFromRemainingArguments=$false)] [String[]] $modules
         )
 
-  $url_blender = "https://mirrors.dotsrc.org/blender/blender-release/Blender2.79/blender-2.79-windows64.zip"
+  $url_blender = "https://mirrors.dotsrc.org/blender/blender-release/Blender2.81/blender-2.81-windows64.zip"
   $url_pip = "https://bootstrap.pypa.io/get-pip.py"
 
   $out_dir = $url_blender.split('/')[-1]

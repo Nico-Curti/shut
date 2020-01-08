@@ -6,7 +6,7 @@ Function get_ninja
           [Bool] $add2path
         )
 
-  $ninja_version = "1.8.2"
+  $ninja_version = "1.9.0"
   $url_ninja = "https://github.com/ninja-build/ninja/releases/download/v$ninja_version/ninja-win.zip"
 
   Write-Host Download ninja from $url_ninja

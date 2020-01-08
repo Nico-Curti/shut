@@ -1,16 +1,16 @@
 #!/bin/bash
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-reset=`tput sgr0`
+red='\033[1;31m'
+green='\033[1;32m'
+yellow='\033[1;33m'
+reset='\033[0m' # No Color
 
-cmake_version="3.12.1"
 
 function get_cmake
 {
   add2path=$1
   postfix=$2
+  cmake_version="3.16.2"
   cmake_up_version="$(echo $cmake_version | cut -d'.' -f 1,2)"
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -19,12 +19,12 @@ function get_cmake
    url_cmake="https://cmake.org/files/v$cmake_up_version/cmake-$cmake_version-Linux-x86_64.tar.gz"
   fi
 
-  echo "Download CMAKE from " $url_cmake
+  echo -e "${yellow}Download CMAKE from ${url_cmake}${reset}"
   out_dir=$(echo $url_cmake | rev | cut -d'/' -f 1 | rev)
   out="$(basename $out_dir .tar.gz)"
   wget $url_cmake
 
-  echo "Unzip" $out_dir
+  echo -e "${yellow}Unzip ${out_dir}${reset}"
   tar zxf $out_dir
   rm -rf $out_dir
   mv $out cmake
@@ -44,16 +44,16 @@ function install_cmake
   confirm=$2
   postfix=$3
 
-  printf "cmake identification: "
+  printf "${yellow}cmake identification: ${reset}"
   if [ -z $(which cmake) ]; then
-    echo ${red}"NOT FOUND"${reset};
+    echo -e "${red}NOT FOUND${reset}";
     if [ ! -z $(which conda) ]; then
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
         conda install -y -c anaconda cmake;
       else
         read -p "Do you want install it? [y/n] " confirm
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           conda install -y -c anaconda cmake;
         fi
@@ -65,7 +65,7 @@ function install_cmake
       else
         read -p "Do you want install it? [y/n] " confirm;
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           get_cmake $add2path $postfix;
         fi
@@ -74,20 +74,18 @@ function install_cmake
     fi
     # end python found
   else
-    echo ${green}"FOUND"${reset}
+    echo -e "${green}FOUND${reset}"
     ver=$(echo $(cmake --version) | cut -d' ' -f 3)
     ver=$(echo "${ver//./}")
     currver=$(echo "${cmake_version//./}")
-    echo $ver
-    echo $currver
     if [ $ver -lt $currver ]; then
-      echo ${red}"Old CMake version found"${reset}
+      echo -e "${red}Old CMake version found${reset}"
       if [ "$confirm" == "-y" ] || [ "$confirm" == "-Y" ] || [ "$confirm" == "yes" ]; then
         get_cmake $add2path $postfix;
       else
         read -p "Do you want install it? [y/n] " confirm;
         if [ "$confirm" == "n" ] || [ "$confirm" == "N" ]; then
-          echo ${red}"Abort"${reset};
+          echo -e "${red}Abort${reset}";
         else
           get_cmake $add2path $postfix;
         fi
