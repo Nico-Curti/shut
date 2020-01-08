@@ -81,17 +81,18 @@ if ( $silent )
 . "$PROFILE"
 
 # g++ Installer
-Write-Host "Installation g++"
-if ( $silent )
-{
-  Start-Transcript -Append -Path $log
-}
-install_g++ -add2path $true -confirm $confirm
-if ( $silent )
-{
-  Stop-Transcript
-}
-. "$PROFILE"
+## TOO SLOW FOR CI
+#Write-Host "Installation g++"
+#if ( $silent )
+#{
+#  Start-Transcript -Append -Path $log
+#}
+#install_g++ -add2path $true -confirm $confirm
+#if ( $silent )
+#{
+#  Stop-Transcript
+#}
+#. "$PROFILE"
 
 # Chocolatey Installer
 Write-Host "Installation Chocolatey"
