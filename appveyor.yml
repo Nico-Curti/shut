@@ -7,10 +7,6 @@ environment:
     - platform: Win64
       COMPILER: vs
       MSVC_SETUP_ARG: x64
-      PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.3"
-      PYTHON_ARCH: "64"
-      MINICONDA: "C:\\Miniconda36-x64"
 
 install:
   # Use Miniconda to accelerate the build (max time for CI is 60 minutes!)
@@ -28,15 +24,16 @@ before_build:
 build_script:
   - ps: .\install.ps1 -y
 
-on_finish:
-  - "SET PROFILE=C:\\Users\\appveyor\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1"
-  - . "$PROFILE"
-  - refreshenv
+# on_finish:
+  # - "SET PROFILE=C:\\Users\\appveyor\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1"
+  # - . "$PROFILE"
+  # - refreshenv
+
   # - g++ --version
   # - make --version
-  - cmake --version
-  - python --version
-  - conda --version
-  - ninja --version
-  - choco --version
+  # - C:\\Users\\appveyor\\toolchain\\cmake\\bin\\cmake.exe --version
+  # - C:\\Users\\appveyor\\toolchain\\Miniconda3\\python.exe --version
+  # - C:\\Users\\appveyor\\toolchain\\Miniconda3\\Scripts\\conda.exe --version
+  # - C:\\Users\\appveyor\\toolchain\\ninja\\ninja.exe --version
+  # - C:\\Users\\appveyor\\toolchain\\chocolatey\\bin\\choco --version
   # - sublime --version
