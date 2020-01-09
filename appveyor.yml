@@ -29,10 +29,14 @@ build_script:
   - ps: .\install.ps1 -y
 
 on_finish:
+  - "SET PROFILE=C:\\Users\\appveyor\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1"
   - . "$PROFILE"
   - refreshenv
-  - g++ --version
+  # - g++ --version
+  # - make --version
   - cmake --version
   - python --version
   - conda --version
-  - make --version
+  - ninja --version
+  - choco --version
+  # - sublime --version

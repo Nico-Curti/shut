@@ -1,6 +1,6 @@
 os:
   - linux
-  - osx
+  # - osx
 
 script:
   - chmod 777 ./install.sh
