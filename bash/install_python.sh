@@ -62,7 +62,7 @@ function install_python
   elif [ "$(python -c 'import sys;print(sys.version_info[0])')" -eq "3" ]; then # right python version installed
     echo -e "${green}FOUND${reset}"
     Conda=$(which python)
-    printf "Conda identification: "
+    printf "${yellow}Conda identification: ${reset}"
     if echo $Conda | grep -q "Miniconda" || echo $Conda | grep -q "anaconda"; then
       # CONDA INSTALLER FOUND
       echo -e "${green}FOUND${reset}";
