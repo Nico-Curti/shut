@@ -4,7 +4,7 @@ os:
 
 script:
   - chmod 777 ./install.sh
-  - travis_wait 360 ./install.sh -y
+  - travis_wait 720 ./install.sh -y
   - source ~/.bashrc
   - g++ --version
   - cmake --version
