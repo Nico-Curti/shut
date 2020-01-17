@@ -63,7 +63,7 @@ function install_python
     echo -e "${green}FOUND${reset}"
     Conda=$(which python)
     printf "${yellow}Conda identification: ${reset}"
-    if echo $Conda | grep -q "miniconda" || echo $Conda | grep -q "anaconda"; then
+    if echo $Conda | grep -q "Miniconda" || echo $Conda | grep -q "anaconda"; then
       # CONDA INSTALLER FOUND
       echo -e "${green}FOUND${reset}";
       for module in ${3:+"$@"}; do
