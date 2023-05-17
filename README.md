@@ -35,6 +35,7 @@ The list of installers is the following:
 |    julia      | :+1: <br/> (version 1.1.0)  | :+1: <br/> (version 1.0.1)  |
 |   firefox     | :+1: <br/> (version latest) | :+1: <br/> (version latest) |
 |  freesurfer   |        *miss*               | :+1: <br/> (version 7.4.0)  |
+|      bc       |        *miss*               | :+1: <br/> (version latest) |
 
 An usage example of these scripts is given in [install.sh](https://github.com/Nico-Curti/shut/blob/master/install.sh) (for Linux and MacOs) and [install.ps1](https://github.com/Nico-Curti/shut/blob/master/install.ps1) (for Windows).
 
